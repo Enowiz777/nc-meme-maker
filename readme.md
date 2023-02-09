@@ -17,3 +17,26 @@
 
 - context: paint brush
 
+app.js
+```
+```
+- coordinate system starts from the top-left corner.
+- fillrect and stroke. 
+
+
+# 3. Paths
+
+- Create lines 
+```js
+// rectangle created but no stroke.
+ctx.rect(50,50,100,100);
+
+// fill in the rectangle 
+ctx.fill();
+
+
+```
+
+```js
+
+```
