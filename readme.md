@@ -5,6 +5,11 @@
 1. Install Live Server from VSC package.
 2. 
 
+# References
+
+https://www.w3schools.com/tags/canvas_arc.asp
+https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineTo
+
 # Canvas API
 
 # 1. The Power of Canvas
@@ -40,3 +45,4 @@ ctx.fill();
 ```js
 
 ```
+
