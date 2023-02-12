@@ -4,9 +4,7 @@ const ctx = canvas.getContext("2d");
 canvas.width = 800;
 canvas.height = 800;
 
-// Starting location (two coordinate)
-// Last two creates width and heights.
-// ctx.fillRect(50, 50, 100, 200);
+ctx.fillRect(50, 50, 100, 200);
 
 /*
 Experiment
@@ -87,7 +85,7 @@ ctx.lineTo(450, 200);
 ctx.stroke()
 // ctx.fill();
 
-*/
+
 
 // create human body
 
@@ -105,3 +103,5 @@ ctx.fillStyle = "white";
 ctx.arc(260 + 10, 80, 8, Math.PI, 2 * Math.PI);
 ctx.arc(220 + 10, 80, 8, Math.PI, 2 * Math.PI);
 ctx.fill();
+
+*/
