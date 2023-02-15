@@ -36,6 +36,7 @@ canvas.height = 800;
 
 ## 3. Draw Rectangles
 
+1. .fillRect() function: creates a rectangle and fill the rectangle.
 - Once you create a canvas element, you can use functions to draw.
 - What are inputs of .fillrect().
     - Starting location (two coordinates) of a rectangle.
@@ -47,12 +48,31 @@ canvas.height = 800;
 ```
 - Output: creates a rectangle with 100px width and 200px height starting on (50,50) of the canvas. 
 
+
+2. .rect() and .fill()
+
+
+ex 1: Create rectangles and fill them with color.
 ```
 // fill all rectangles together when the .fill() function gets called.
 
 ctx.rect(50,50,100,100);
 ctx.rect(150,150, 100,100);
 ctx.rect(250,250,100,100);
+ctx.fill();
+```
+- .fill() function will fill the rectangles created previously. 
+
+ex 2: Create two different set of rectangles and fill them with a different color.
+
+```js
+
+// This creates 3 squares with red fillings.
+ctx.rect(150,150,100,100);
+ctx.rect(250,250, 100,100);
+ctx.fill();
+ctx.rect(350,350,100,100);
+ctx.fillStyle = "red";
 ctx.fill();
 ```
 

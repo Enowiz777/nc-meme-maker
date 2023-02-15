@@ -1,33 +1,5 @@
-const canvas = document.querySelector("canvas");
-
-const ctx = canvas.getContext("2d");
-canvas.width = 800;
-canvas.height = 800;
-
-ctx.fillRect(50, 50, 100, 200);
 
 /*
-Experiment
- 
-
-// fill all rectangles together when the .fill() function gets called.
-
-ctx.rect(50,50,100,100);
-ctx.rect(150,150, 100,100);
-ctx.rect(250,250,100,100);
-ctx.fill();
-
-
-
-// This would fill all 3 squares created.
-ctx.rect(150,150,100,100);
-ctx.rect(250,250, 100,100);
-ctx.fill();
-ctx.rect(350,350,100,100);
-ctx.fillStyle = "red";
-ctx.fill();
-
-
 // begin path will seperate the batch of editing.
 
 ctx.rect(50,50,100,100);
@@ -104,4 +76,125 @@ ctx.arc(260 + 10, 80, 8, Math.PI, 2 * Math.PI);
 ctx.arc(220 + 10, 80, 8, Math.PI, 2 * Math.PI);
 ctx.fill();
 
+
+// onClick event and get the coordinate to draw a line to that location.
+// As you do some testing, you know that offsetX and offsetY attributes are the one that is giving the coordinate of the click event.
+// click the first line, it doesn't draw the line. We can add moveTo.
+
+
+ctx.lineWidth = 2;
+
+
+const colors = [
+    "#ff3838",
+    "#ffb8b8",
+    "#c56cf0",
+    "#ff9f1a",
+    "#fff200",
+    "#32ff7e",
+    "#7efff5",
+]
+
+function onClick(event) {
+    ctx.beginPath();
+    ctx.moveTo(0,0);
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    ctx.strokeStyle = color;
+    ctx.lineTo(event.offsetX, event.offsetY);
+    ctx.stroke();
+}
+canvas.addEventListener("mousemove", onClick);
 */
+
+/*
+const canvas = document.querySelector("canvas");
+
+const ctx = canvas.getContext("2d");
+canvas.width = 800;
+canvas.height = 800;
+ctx.lineWidth =2;
+
+ctx.moveTo(200,200);
+ctx.lineTo(400,400);
+ctx.stroke();
+
+
+let isPainting = false;
+
+// Call move to whenever the user move the pen. 
+// onMove will keep moving the pen. When the user put the mousedown, it will make the isPainting true and will trigger lineTo() and .stroke() functions.
+function onMove(event){
+    if(isPainting){
+        ctx.lineTo(event.offsetX, event.offsetY);
+        ctx.stroke();
+        return;
+    }
+    ctx.moveTo(event.offsetX, event.offsetY);
+}
+
+function startPainting(){
+    isPainting = true;
+}
+
+function cancelPainting() {
+    isPainting = false;
+}
+
+canvas.addEventListener("mousemove", onMove);
+canvas.addEventListener("mousedown", startPainting);
+canvas.addEventListener("mouseup", cancelPainting);
+
+// problem: when the user goes outside the canvase, onMouseUp() event never get fired.
+
+// fix
+
+canvas.addEventListener("mouseleave", cancelPainting);
++
+*/
+
+// create an input for the thickness of pen.
+
+const lineWidth = document.getElementById("line-width");
+const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext("2d");
+canvas.width = 800;
+canvas.height = 800;
+ctx.lineWidth = lineWidth.value;
+let isPainting = false;
+
+// Call move to whenever the user move the pen. 
+// onMove will keep moving the pen. When the user put the mousedown, it will make the isPainting true and will trigger lineTo() and .stroke() functions.
+function onMove(event){
+    if(isPainting){
+        ctx.lineTo(event.offsetX, event.offsetY);
+        ctx.stroke();
+        return;
+    }
+    ctx.moveTo(event.offsetX, event.offsetY);
+}
+
+function startPainting(){
+    isPainting = true;
+}
+
+function cancelPainting() {
+    isPainting = false;
+    ctx.beginPath();
+}
+
+function onLineWidthChange(event){
+    ctx.lineWidth = event.target.value;
+}
+
+canvas.addEventListener("mousemove", onMove);
+canvas.addEventListener("mousedown", startPainting);
+canvas.addEventListener("mouseup", cancelPainting);
+canvas.addEventListener("mouseleave", cancelPainting);
+
+// create event listener to the input change thickness change.
+lineWidth.addEventListener("change", onLineWidthChange);
+
+//Issue: the previous line is changing the tickness
+// You have to begin a new path when the user is moving the mouse. when the user finish moving the mouse we then begin the path. or when the user finishes the painting.
+
+// Issue: we are going one by one and we are moving the thickness. If you want to you can change the steps. you just need to set the attribute called steps.
