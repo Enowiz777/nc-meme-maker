@@ -176,3 +176,23 @@ ctx.fillStyle = "white";
 ctx.arc(260 + 10, 80, 8, Math.PI, 2 * Math.PI);
 ctx.arc(220 + 10, 80, 8, Math.PI, 2 * Math.PI);
 ctx.fill();
+
+```
+
+20230216
+
+- Create a color input in index.html
+```html
+<input type="color" id="color">
+```
+- Add EventListener to the input and take the color information.
+
+- Give another option for the user. 
+- IT is hard for users to find color.
+- Copy paste existing color to the HTML. 
+- Data attribute to put inside the HTML tag. Very useful!
+- console.dir - show as an object.
+    - within the HTML element, you see a dataset and you can see the data that you have which is called color.
+
+- Create a button to change from drawing to fill ins 
+

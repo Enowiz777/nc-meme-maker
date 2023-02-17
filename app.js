@@ -154,6 +154,11 @@ canvas.addEventListener("mouseleave", cancelPainting);
 
 // create an input for the thickness of pen.
 
+const colorOptions = 
+Array.from(
+    document.getElementsByClassName("color-option")
+    );
+const color = document.getElementById("color");
 const lineWidth = document.getElementById("line-width");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
@@ -161,6 +166,12 @@ canvas.width = 800;
 canvas.height = 800;
 ctx.lineWidth = lineWidth.value;
 let isPainting = false;
+
+function stokeFillStyle(colorValue){
+    console.log(colorValue);
+    ctx.strokeStyle = colorValue;
+    ctx.fillStyle = colorValue;
+}
 
 // Call move to whenever the user move the pen. 
 // onMove will keep moving the pen. When the user put the mousedown, it will make the isPainting true and will trigger lineTo() and .stroke() functions.
@@ -186,6 +197,18 @@ function onLineWidthChange(event){
     ctx.lineWidth = event.target.value;
 }
 
+function onColorChange(event){
+    // Output color information: console.log(event.target.value);
+    stokeFillStyle(event.target.value);
+}
+
+function onColorClick(event){
+    // get the color from the data-color.
+    const colorValue = event.target.dataset.color
+    stokeFillStyle(colorValue);
+    color.value = colorValue;
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
@@ -198,3 +221,13 @@ lineWidth.addEventListener("change", onLineWidthChange);
 // You have to begin a new path when the user is moving the mouse. when the user finish moving the mouse we then begin the path. or when the user finishes the painting.
 
 // Issue: we are going one by one and we are moving the thickness. If you want to you can change the steps. you just need to set the attribute called steps.
+
+// Add a color EventListener
+color.addEventListener("change", onColorChange);
+
+colorOptions.forEach(color => color.addEventListener("click", onColorClick))
+// console log HTML collections.
+// Go through each divs and add an event listeners.
+// console.log(colorOptions);
+// ArrayLike object and is not array. You have to construct Array from the div.
+
