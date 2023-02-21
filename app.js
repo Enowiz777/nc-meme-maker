@@ -154,6 +154,12 @@ canvas.addEventListener("mouseleave", cancelPainting);
 
 // create an input for the thickness of pen.
 
+
+// buttons
+const modeBtn = document.getElementById("mode-btn");
+const destroyBtn = document.getElementById("destroy-btn");
+const eraserBtn = document.getElementById("eraser-btn");
+
 const colorOptions = 
 Array.from(
     document.getElementsByClassName("color-option")
@@ -166,6 +172,12 @@ canvas.width = 800;
 canvas.height = 800;
 ctx.lineWidth = lineWidth.value;
 let isPainting = false;
+let isFilling = false;
+
+// Constant variables
+const CANVAS_WIDTH = 800;
+const CANVAS_HEIGHT = 800;
+
 
 function stokeFillStyle(colorValue){
     console.log(colorValue);
@@ -209,10 +221,43 @@ function onColorClick(event){
     color.value = colorValue;
 }
 
+function onModeClick(){
+    if(isFilling){
+        isFilling = false;
+        modeBtn.innerText = "Fill";
+    } else {
+        isFilling = true;
+        modeBtn.innerText = "Draw";
+    }
+}
+
+function onCanvasClick(){
+    if(isFilling){
+        // create a new rectangle or square the size of the canvas and fill it with the current color
+        ctx.fillRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+
+    }
+}
+
+function onDestroyClick() {
+    // Fill in the rectangle with white.
+    ctx.fillStyle ="white";
+    ctx.fillRect = (0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+}
+
+function onEraserClick() {
+    ctx.strokeStyle = "white";
+    isFilling = false;
+    modeBtn.innerText = "Fill";
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
 canvas.addEventListener("mouseleave", cancelPainting);
+
+canvas.addEventListener("click", onCanvasClick);
+destroyBtn.addEventListener("click", onDestroyClick);
 
 // create event listener to the input change thickness change.
 lineWidth.addEventListener("change", onLineWidthChange);
@@ -230,4 +275,5 @@ colorOptions.forEach(color => color.addEventListener("click", onColorClick))
 // Go through each divs and add an event listeners.
 // console.log(colorOptions);
 // ArrayLike object and is not array. You have to construct Array from the div.
-
+modeBtn.addEventListener("click", onModeClick);
+eraserBtn.addEventListener("click", onEraserClick);

@@ -196,3 +196,13 @@ ctx.fill();
 
 - Create a button to change from drawing to fill ins 
 
+20230220
+- Create a button that change the mode from Fill to Draw.
+- Create the fill board with color function called onCanvasClick().
+- Create a button to erase all.
+- Create a eraser mode: Drawing with color white.
+
+Summary
+- HTML loads: input has value of 5
+- You can put data in the HTML using data-set
+- 
