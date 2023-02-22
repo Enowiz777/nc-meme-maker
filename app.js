@@ -159,6 +159,8 @@ canvas.addEventListener("mouseleave", cancelPainting);
 const modeBtn = document.getElementById("mode-btn");
 const destroyBtn = document.getElementById("destroy-btn");
 const eraserBtn = document.getElementById("eraser-btn");
+const fileInput = document.getElementById("file");
+const textInput = document.getElementById("text");
 
 const colorOptions = 
 Array.from(
@@ -251,6 +253,37 @@ function onEraserClick() {
     modeBtn.innerText = "Fill";
 }
 
+function onFileChange(event) {
+    console.dir(event.target);
+    const file = event.target.files[0];
+    const url = URL.createObjectURL(file);
+    console.log(url);
+    // example: blob:http://127.0.0.1:5500/6201453a-fb09-4c4e-b76a-4185544786ac
+    const image = new Image();
+    image.src = url;
+    image.onload = function () {
+        ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        fileInput.value = null;
+      };
+
+}
+
+function onDoubleClick(event) {
+    // 
+    const text = textInput.value;
+    if (text !== ""){
+        // save the current state of styles.
+        ctx.save();
+        ctx.lineWidth = 1;
+        // change the text font to what we want.
+        ctx.font = "68px 'Press Start 2P'";
+        ctx.fillText(text, event.offsetX, event.offsetY);
+        // restore the previous styles.
+        ctx.restore();
+    }
+  }
+  
+canvas.addEventListener("dblclick", onDoubleClick);
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
@@ -277,3 +310,5 @@ colorOptions.forEach(color => color.addEventListener("click", onColorClick))
 // ArrayLike object and is not array. You have to construct Array from the div.
 modeBtn.addEventListener("click", onModeClick);
 eraserBtn.addEventListener("click", onEraserClick);
+fileInput.addEventListener("change", onFileChange);
+

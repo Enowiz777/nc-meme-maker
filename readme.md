@@ -206,3 +206,28 @@ Summary
 - HTML loads: input has value of 5
 - You can put data in the HTML using data-set
 - 
+
+# Meme maker.
+
+
+10. Put text on top of the image.
+
+- Add HTML input called 
+- When the user select the file, the file infomation gets stored in the memory of the browser. 
+- Address of the URL doesn't exist.
+- You have to change it to an other URL.
+- create new image
+```
+const image = new image()
+```
+- You can add many same event listeners.
+
+- Create a text input. 
+- When canvas is double clicked.
+```
+canvas.addEventListener("dblclick", onDoubleClick);
+```
+
+- Create a button that saves. 
+- when you print image, it will be encoded to URL base64.
+- 
