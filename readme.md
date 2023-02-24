@@ -231,3 +231,11 @@ canvas.addEventListener("dblclick", onDoubleClick);
 - Create a button that saves. 
 - when you print image, it will be encoded to URL base64.
 - 
+
+20230223-recap
+
+- Recap
+
+# CSS
+- import Reset CSS
+- 
