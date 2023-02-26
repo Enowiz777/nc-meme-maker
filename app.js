@@ -3,7 +3,7 @@ const penBtn = document.getElementById("mode-pen");
 const fillBtn = document.getElementById("mode-fill");
 const newBtn = document.getElementById("new-btn");
 
-// static
+// constant variables
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 800;
 
